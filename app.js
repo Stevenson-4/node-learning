@@ -8,28 +8,28 @@ var express = require('express');
  */
 var morgan = require('morgan');
 
+/**
+ * https://nodejs.org/docs/latest/api/path.html
+ */
+var path = require('path');
+
 var app = express();
 
 var config = require('./package.json').config;
-var c = function() {
-    console.log.apply(this, arguments);
-};
-var d = function() {
-    console.dir.apply(this, arguments);
-}
 
-// Attaching morgan as middleware to the app
+// Controller imports
+var TestController = require('./controllers/TestController');
+var SecondController = require('./controllers/SecondController');
+
+// Others
+var cu = require('./helpers/ConsoleUtil');
+
+// Attaching middlewares to the app
 app.use(morgan('tiny'));
-
-app.get('/', function(req,res){
-	return res.send('Stevenson');
-});
-
-app.post('/user', function(req,res){
-	return res.send('Stevenson son nellli');
-});
+app.use('/', TestController);
+app.use('/second', SecondController);
 
 // Start the server
-app.listen(config.port, function() {
-    c('Server is listening on ' + config.port);
+app.listen(config.port, function () {
+    cu.l('Server is listening on ' + config.port);
 });
