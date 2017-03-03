@@ -1,3 +1,4 @@
 var path = require('path');
 var cu = require('./helpers/ConsoleUtil');
-c.l(path);
+
+cu.l(path.join(__dirname,'controllers/TestController'));
