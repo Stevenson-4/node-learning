@@ -8,9 +8,13 @@ var d = function() {
     console.dir.apply(this, arguments);
 }
 
-app.use('/', function(req,res){
+app.get('/', function(req,res){
 	return res.send('Stevenson');
-})
+});
+
+app.post('/user', function(req,res){
+	return res.send('Stevenson son nellli');
+});
 
 // Start the server
 app.listen(config.port, function() {
