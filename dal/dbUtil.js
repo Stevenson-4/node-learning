@@ -1,4 +1,5 @@
 module.exports = {
+    // Setting  default data type to tabel fields
     getDbDefaultValue: function (dataType) {
         var value = null;
         switch (dataType) {

@@ -1,20 +1,10 @@
 var dbUtil = require('../dal/dbUtil');
+var Models = require('../dal/models');
 
 module.exports = {
-    extractValues: function(fields, source) {
+    extractValuesUsingModel: function(fields, source, table) {
         var values = [];
-        for(var i in fields) {
-            var value = source[fields[i]];
-            if(typeof value === 'string') {
-                value = "'" + value + "'";
-            }
-            values.push(value || null);
-        }
-        return values;
-    },
-
-    extractValuesUsingModel: function(fields, source, model) {
-        var values = [];
+        var model = Models[table];
         for(var i in fields) {
             var field = fields[i];
             var value = source[field];
@@ -22,7 +12,6 @@ module.exports = {
                 value = "'" + value + "'";
             }
             var defaultVal = dbUtil.getDbDefaultValue(model[field]);
-            console.log(defaultVal);
             values.push(value || defaultVal);
         }
         return values;
