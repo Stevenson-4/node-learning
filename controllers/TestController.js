@@ -2,6 +2,7 @@ var router = require('express').Router();
 var db = require('../dal/db');
 var Tables = require('../dal/tables');
 var Util = require('../helpers/Util');
+var Models = require('../dal/models');
 
 router.get('/', function (req, res) {
     console.log('hiiii');
@@ -18,23 +19,15 @@ router.get('/', function (req, res) {
 
 router.post('/emp', function (req, res) {
     var obj = {
-        id: 1005,
-        name: "Neilsen Man",
+        id: 1006,
+        name: "Henken Reg",
         age: 45,
-        // exp: 3,
-        salary: 51000.00,
+        exp: 3,
+        // salary: 51000.00,
         karma: 1
     };
-    var fields = [
-        'id',
-        'name',
-        'age',
-        'exp',
-        'salary',
-        'karma'
-    ];
-    var values = Util.extractValuesUsingModel(fields, obj, Tables.emp);
-    var query = "insert into " + Tables.emp + " (" + fields.join(',') + ") values (" + values.join(',') + ")";
+    var values = Util.extractValuesUsingModel(Tables.emp, obj);
+    var query = "insert into " + Tables.emp + " (" + Object.keys(Models[Tables.emp]).join(',') + ") values (" + values.join(',') + ")";
     console.log('POST /emp', query);
     db
     .query(query)

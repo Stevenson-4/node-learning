@@ -2,9 +2,10 @@ var dbUtil = require('../dal/dbUtil');
 var Models = require('../dal/models');
 
 module.exports = {
-    extractValuesUsingModel: function(fields, source, table) {
+    extractValuesUsingModel: function(table, source) {
         var values = [];
         var model = Models[table];
+        var fields = Object.keys(model);
         for(var i in fields) {
             var field = fields[i];
             var value = source[field];
