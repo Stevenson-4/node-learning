@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var sequelize = require('sequelize');
 
 router
     .get('/', function (req, res) {
