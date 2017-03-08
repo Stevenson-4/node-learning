@@ -15,7 +15,7 @@ var path = require('path');
 
 var app = express();
 
-var config = require('./package.json').config;
+var config = require('./config/config.json');
 
 // Controller imports
 var TestController = require('./controllers/TestController');

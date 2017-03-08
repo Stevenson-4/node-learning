@@ -1,17 +1,12 @@
-var pgp = require('pg-promise')();
 var connection = require('./dbconf').connectionString;
-var db = pgp(connection);
+var Sequelize = require('sequelize');
+var sequelize = new Sequelize(connection);
 
-var dbService = {
-    select: function(table, fields) {
-        var columns = fields;
-        if(Array.isArray(fields)) {
-            columns = fields.join(',');
-        }
-        return db.query('select ' + (columns || '*') + ' from ' + table);
-    },
+// console.log(sequelize);
 
-    query: db.query
+var db = {
+    sequelize: sequelize,
+    Sequelize: Sequelize
 };
 
-module.exports = dbService;
+module.exports = db;
